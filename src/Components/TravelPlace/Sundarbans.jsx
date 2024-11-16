@@ -19,6 +19,21 @@ const Sundarbans = () => {
 
                                                 Encompassing a vast area of over 10,000 square kilometers across both countries, the Sundarbans is characterized by its distinctive network of tidal waterways, mudflats, and dense mangrove forests. The name "Sundarbans" is derived from the dominant mangrove tree species, the Sundari (Heritiera fomes), which contributes to the region's remarkable biodiversity.
                                             </p>
+                                            {/* Stats Section */}
+                                            <div className="grid grid-cols-3 gap-4 py-6">
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">120km</div>
+                                                    <div className="text-sm text-gray-300">Beach Length</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">4.8</div>
+                                                    <div className="text-sm text-gray-300">Rating</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">28°C</div>
+                                                    <div className="text-sm text-gray-300">Temperature</div>
+                                                </div>
+                                            </div>
                                             <Link to='/login'>
                                                 <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">Explore</button>
                                             </Link>

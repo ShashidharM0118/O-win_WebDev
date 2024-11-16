@@ -15,11 +15,24 @@ const Sajek = () => {
                                 <div className="flex flex-col lg:flex-row gap-20 justify-between px-5">
                                     <div className="flex items-center">
                                         <div>
-                                            <h1 className="mb-5 text-6xl md:text-7xl lg:text-9xl font-bold">SAJEK</h1>
-                                            <p className="mb-5 text-xl lg:text-2xl">Sajek is a picturesque hill station nestled in the Chittagong Hill Tracts of Bangladesh, renowned for its breathtaking natural beauty and serene landscapes. Situated in the Rangamati district, this idyllic destination is a haven for nature enthusiasts and those seeking tranquility away from the hustle and bustle of city life.
-
-                                                The region is characterized by lush green hills, dense forests, and a cool, refreshing climate, making it a perfect retreat for visitors seeking respite from the sweltering heat of the plains. Sajek offers stunning panoramic views of valleys, meandering rivers, and quaint villages, adding to its allure.
+                                            <h1 className="mb-5 text-6xl md:text-7xl lg:text-9xl font-bold">Chikkamagaluru</h1>
+                                            <p className="mb-5 text-xl lg:text-2xl">Chikkamagaluru, often called the Coffee Land of Karnataka, is a hidden gem nestled in the Western Ghats. Known for its lush coffee plantations and mist-covered hills, the town offers a serene escape from the hustle and bustle of city life. The area is rich in natural beauty, with scenic landscapes, waterfalls, and trekking spots that attract adventure seekers and nature lovers alike. Mullayanagiri, the highest peak in Karnataka, offers panoramic views of the surrounding hills, while Hebbe Falls is a refreshing stop for those seeking tranquility in nature.
                                             </p>
+                                            {/* Stats Section */}
+                                            <div className="grid grid-cols-3 gap-4 py-6">
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">120km</div>
+                                                    <div className="text-sm text-gray-300">Beach Length</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">4.8</div>
+                                                    <div className="text-sm text-gray-300">Rating</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">28°C</div>
+                                                    <div className="text-sm text-gray-300">Temperature</div>
+                                                </div>
+                                            </div>
                                             <Link to='/login'>
                                                 <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">Explore</button>
                                             </Link>

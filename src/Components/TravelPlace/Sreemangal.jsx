@@ -19,8 +19,23 @@ const Sreemangal = () => {
 
                                                 The town is situated amidst rolling hills and verdant valleys, where endless stretches of tea estates paint the scenery in shades of green. The undulating tea gardens, interspersed with winding roads and streams, create a stunning mosaic that captivates visitors as they explore this idyllic region.
                                             </p>
+                                            {/* Stats Section */}
+                                            <div className="grid grid-cols-3 gap-4 py-6">
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">120km</div>
+                                                    <div className="text-sm text-gray-300">Beach Length</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">4.8</div>
+                                                    <div className="text-sm text-gray-300">Rating</div>
+                                                </div>
+                                                <div className="border-l-2 border-yellow-400 pl-4">
+                                                    <div className="text-3xl font-bold">28°C</div>
+                                                    <div className="text-sm text-gray-300">Temperature</div>
+                                                </div>
+                                            </div>
                                             <Link to='/login'>
-                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">EXPLORE</button>
+                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">Explore</button>
                                             </Link>
                                         </div>
                                     </div>
