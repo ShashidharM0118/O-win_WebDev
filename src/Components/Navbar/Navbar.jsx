@@ -1,13 +1,13 @@
 import { Link, NavLink } from 'react-router-dom';
 import { FaPersonWalkingLuggage } from 'react-icons/fa6';
 import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx"
-import ProfileLogo from '../ProfileLogo/ProfileLogo';
+import ProfileLogo from '../ProfileLogo/ProfileLogo.jsx';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebase.config';
 import { Context } from '../../Context/AuthContext';
 import { getAuth, signOut } from 'firebase/auth';
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 const Navbar = () => {
     const { user, setUser } = useContext(Context);
