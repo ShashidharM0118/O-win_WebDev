@@ -18,8 +18,38 @@ const RouteMap = () => {
   const [directions, setDirections] = useState(null);
   const [placeType, setPlaceType] = useState("restaurant");
   const [isCalculating, setIsCalculating] = useState(false);
+  const [currDestination, setCurrDestination] = useState([]);
 
-  const api_key = "AIzaSyCH582J8KurpHix2JMAYtitxDfc-ANbvVk"; // Replace with your API key
+  const api_key = "AIzaSyCH582J8KurpHix2JMAYtitxDfc-ANbvVk";
+
+
+
+  // Load curr_destination from localStorage on component mount
+ useEffect(() => {
+    const loadSavedDestinations = () => {
+      const savedDestinations = localStorage.getItem('curr_destination');
+      if (savedDestinations && window.google && window.google.maps) {
+        const parsedDestinations = JSON.parse(savedDestinations);
+        setCurrDestination(parsedDestinations);
+        
+        // Reconstruct selectedLocations from saved destinations
+        if (parsedDestinations.length > 0) {
+          const reconstructedLocations = parsedDestinations.map(dest => ({
+            geometry: {
+              location: new window.google.maps.LatLng(dest.latitude, dest.longitude)
+            },
+            place_id: `place_${dest.latitude}_${dest.longitude}`,
+            name: `Location at (${dest.latitude}, ${dest.longitude})`
+          }));
+          setSelectedLocations(reconstructedLocations);
+        }
+      }
+    };
+
+    if (googleMapsLoaded) {
+        loadSavedDestinations();
+      }
+    }, [googleMapsLoaded]);
 
   const placeTypes = [
     { value: "restaurant", label: "Restaurants" },
@@ -36,6 +66,29 @@ const RouteMap = () => {
     }
   }, []);
 
+
+  useEffect(() => {
+    const checkGoogleMapsLoaded = () => {
+      if (window.google && window.google.maps) {
+        setGoogleMapsLoaded(true);
+      }
+    };
+
+    // Check immediately
+    checkGoogleMapsLoaded();
+
+    // Set up an interval to check until Google Maps is loaded
+    const interval = setInterval(() => {
+      if (window.google && window.google.maps) {
+        setGoogleMapsLoaded(true);
+        clearInterval(interval);
+      }
+    }, 100);
+
+    // Cleanup
+    return () => clearInterval(interval);
+  }, []);
+  
   useEffect(() => {
     if (googleMapsLoaded && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -109,12 +162,34 @@ const RouteMap = () => {
 
   const addToRoute = (place) => {
     if (!selectedLocations.find(loc => loc.place_id === place.place_id)) {
-      setSelectedLocations([...selectedLocations, place]);
+      const newLocations = [...selectedLocations, place];
+      setSelectedLocations(newLocations);
+      
+      // Add to currDestination
+      const newDestination = {
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng(),
+        flag: false
+      };
+      const updatedDestinations = [...currDestination, newDestination];
+      setCurrDestination(updatedDestinations);
+      localStorage.setItem('curr_destination', JSON.stringify(updatedDestinations));
     }
   };
 
   const removeFromRoute = (placeId) => {
-    setSelectedLocations(selectedLocations.filter(loc => loc.place_id !== placeId));
+    const locationToRemove = selectedLocations.find(loc => loc.place_id === placeId);
+    if (locationToRemove) {
+      // Remove from currDestination
+      const updatedDestinations = currDestination.filter(dest => 
+        dest.latitude !== locationToRemove.geometry.location.lat() ||
+        dest.longitude !== locationToRemove.geometry.location.lng()
+      );
+      setCurrDestination(updatedDestinations);
+      localStorage.setItem('curr_destination', JSON.stringify(updatedDestinations));
+    }
+    const newLocations = selectedLocations.filter(loc => loc.place_id !== placeId);
+    setSelectedLocations(newLocations);
   };
 
   const calculateOptimalRoute = () => {
@@ -133,24 +208,29 @@ const RouteMap = () => {
     }));
 
     const origin = currentLocation;
-    const destination = currentLocation; // Round trip
+    const destination = currentLocation; 
 
     directionsService.route(
       {
         origin,
         destination,
         waypoints,
-        optimizeWaypoints: true, // This will optimize the route
+        optimizeWaypoints: true,
         travelMode: window.google.maps.TravelMode.DRIVING
       },
       (result, status) => {
         setIsCalculating(false);
         if (status === window.google.maps.DirectionsStatus.OK) {
           setDirections(result);
-          // Reorder selected locations based on optimized waypoint order
           const optimizedOrder = result.routes[0].waypoint_order;
+          
+          // Reorder both selectedLocations and currDestination
           const reorderedLocations = optimizedOrder.map(index => selectedLocations[index]);
           setSelectedLocations(reorderedLocations);
+          
+          const reorderedDestinations = optimizedOrder.map(index => currDestination[index]);
+          setCurrDestination(reorderedDestinations);
+          localStorage.setItem('curr_destination', JSON.stringify(reorderedDestinations));
         } else {
           alert("Could not calculate directions. Please try again.");
         }
@@ -161,6 +241,8 @@ const RouteMap = () => {
   const resetRoute = () => {
     setSelectedLocations([]);
     setDirections(null);
+    setCurrDestination([]);
+    localStorage.removeItem('curr_destination');
   };
 
   return (
@@ -185,7 +267,6 @@ const RouteMap = () => {
             </select>
           </div>
           
-          {/* Selected Locations */}
           {selectedLocations.length > 0 && (
             <div className="mb-4">
               <div className="flex items-center justify-between mb-2">
@@ -287,7 +368,6 @@ const RouteMap = () => {
               mapContainerClassName="w-full h-full"
               mapContainerStyle={{ height: "100%", width: "100%" }}
             >
-              {/* Current Location Marker */}
               <Marker
                 position={currentLocation}
                 icon={{
@@ -297,8 +377,7 @@ const RouteMap = () => {
                 title="You are here!"
               />
 
-              {/* Place Markers */}
-              {directions === null && placesData.map((place, index) => (
+              {directions === null && placesData.map((place) => (
                 <Marker
                   key={place.place_id}
                   position={place.geometry.location}
@@ -310,7 +389,6 @@ const RouteMap = () => {
                 />
               ))}
 
-              {/* Info Window */}
               {selectedPlace && (
                 <InfoWindow
                   position={selectedPlace.geometry.location}

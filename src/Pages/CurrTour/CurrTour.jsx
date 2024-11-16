@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import PlacesList from "./../../Components/Places/Places"; // Import the PlacesList component
 
 const CurrTour = () => {
     const [currentPlace, setCurrentPlace] = useState("Fetching location...");
     const [errorMessage, setErrorMessage] = useState("");
     const api = "AIzaSyCH582J8KurpHix2JMAYtitxDfc-ANbvVk";
+
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -60,6 +62,9 @@ const CurrTour = () => {
                     View Map
                 </button>
             </Link>
+
+            {/* Render the PlacesList component */}
+            <PlacesList />
         </div>
     );
 };
