@@ -14,7 +14,9 @@
     "@dicebear/avatars-initials-sprites": "^4.10.8",
     "@react-google-maps/api": "^2.20.3",
     "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "firebase": "^10.14.1",
     "localforage": "^1.10.0",
     "lucide-react": "^0.460.0",
@@ -28,6 +30,7 @@
     "semantic-ui-react": "^2.1.5",
     "sort-by": "^1.2.0",
     "swiper": "^10.3.1",
+    "twilio": "^5.3.6",
     "uuid": "^11.0.3"
   },
   "devDependencies": {

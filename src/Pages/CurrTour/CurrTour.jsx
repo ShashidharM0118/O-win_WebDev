@@ -17,7 +17,7 @@ const CurrTour = () => {
 
                     try {
                         const response = await fetch(
-                            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${api}`
+                            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${api_key}`
                         );
 
                         const data = await response.json();
