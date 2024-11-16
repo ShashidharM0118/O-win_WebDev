@@ -218,31 +218,33 @@ const Blogs = () => {
 
   return (
     <div className="blogs-container">
-      <h1>Blog Posts</h1>
+      {/* <h1>Blog Posts</h1> */}
       <button onClick={() => setShowForm(!showForm)} className="add-post-btn">
         {showForm ? "Close Form" : "Add Post"}
       </button>
 
       {showForm && (
         <form onSubmit={handleSubmit} className="blog-form">
-          <div>
-            <label>Upload Image:</label>
-            <input 
-              type="file" 
-              name="image" 
-              accept="image/*" 
-              onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))} 
-            />
-          </div>
-          <div>
-            <label>Upload Video:</label>
-            <input 
-              type="file" 
-              name="video" 
-              accept="video/*" 
-              onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.files[0] }))} 
-            />
-          </div>
+         <div>
+  <label>Upload Image:</label>
+  <input 
+    type="file" 
+    name="image" 
+    accept="image/*" 
+    onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))} 
+    required 
+  />
+</div>
+<div>
+  <label>Upload Video:</label>
+  <input 
+    type="file" 
+    name="video" 
+    accept="video/*" 
+    onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.files[0] }))} 
+    required 
+  />
+</div>
           <div>
             <label>Comment:</label>
             <textarea 
@@ -306,7 +308,7 @@ const Blogs = () => {
                 )}
               </div>
               
-              <div className="rating">{renderStars(post.rating)}</div>
+              {/* <div className="rating">{renderStars(post.rating)}</div> */}
               
               {coordinates && (
                 <div className="location">
@@ -314,7 +316,7 @@ const Blogs = () => {
                   {renderMap(post.location)}
                 </div>
               )}
-              
+              <div className="rating">{renderStars(post.rating)}</div>
               {/* <p className="comment">{post.comment}</p> */}
             </div>
           );

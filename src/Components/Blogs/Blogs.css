@@ -1,3 +1,23 @@
+.blog-form input[type="file"] {
+  display: block;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.blog-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.status-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
 .blogs-container {
   max-width: 800px;
