@@ -44,6 +44,8 @@ const UserProfile = () => {
   const [editingPhone, setEditingPhone] = useState(false);
   const [newPhoneNumber, setNewPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
+  const [bookmarkedPlaces, setBookmarkedPlaces] = useState([]);
+  const [loadingPlaces, setLoadingPlaces] = useState(false);
 
   const fileInputRef = useRef(null);
 
@@ -52,6 +54,44 @@ const UserProfile = () => {
   const [showReauthConfirm, setShowReauthConfirm] = useState(false);
   const [reauthEmail, setReauthEmail] = useState("");
   const [reauthPassword, setReauthPassword] = useState("");
+
+  useEffect(() => {
+    const fetchBookmarkedPlaces = async () => {
+      const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      if (bookmarks.length > 0) {
+        setLoadingPlaces(true);
+        try {
+          const places = await Promise.all(
+            bookmarks.map(async (bookmark) => {
+              const response = await fetch(
+                `https://maps.googleapis.com/maps/api/geocode/json?latlng=${bookmark.lat},${bookmark.lng}&key=${import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}`
+              );
+              const data = await response.json();
+              if (data.results && data.results[0]) {
+                return {
+                  address: data.results[0].formatted_address,
+                  lat: bookmark.lat,
+                  lng: bookmark.lng,
+                };
+              }
+              return {
+                address: "Unknown location",
+                lat: bookmark.lat,
+                lng: bookmark.lng,
+              };
+            })
+          );
+          setBookmarkedPlaces(places);
+        } catch (error) {
+          console.error("Error fetching place names:", error);
+        } finally {
+          setLoadingPlaces(false);
+        }
+      }
+    };
+
+    fetchBookmarkedPlaces();
+  }, []);
 
   useEffect(() => {
     const fetchAuthUserEmail = async () => {
@@ -113,7 +153,6 @@ const UserProfile = () => {
             photoURL: newPhotoURL,
           }));
 
-          // Update local storage with the new profile picture URL
           localStorage.setItem("profileImageUrl", newPhotoURL);
 
           if (
@@ -216,104 +255,137 @@ const UserProfile = () => {
 
   return (
     <div className="ex-user-profile">
-    <div className="ex-profile-picture">
-      {loading ? (
-        <div className="ex-loader">Uploading...</div>
-      ) : (
-        <img src={profilePicture} alt="Profile" />
-      )}
-      {userData.email === authUserEmail && (
-        <>
-          <FaPencilAlt
-            className="ex-edit-icon"
-            onClick={() => fileInputRef.current.click()}
-          />
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="ex-file-input"
-            onChange={handleProfilePictureUpload}
-            accept="image/*"
-          />
-        </>
-      )}
-    </div>
-  
-    <h1>{userData.displayName}</h1>
-  
-    <div className="ex-user-info">
-      <div>
-        <p>
-          <strong>Email:</strong> {userData.email}
-        </p>
+      <div className="ex-profile-picture">
+        {loading ? (
+          <div className="ex-loader">Uploading...</div>
+        ) : (
+          <img src={profilePicture} alt="Profile" />
+        )}
+        {userData.email === authUserEmail && (
+          <>
+            <FaPencilAlt
+              className="ex-edit-icon"
+              onClick={() => fileInputRef.current.click()}
+            />
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="ex-file-input"
+              onChange={handleProfilePictureUpload}
+              accept="image/*"
+            />
+          </>
+        )}
       </div>
-      <div>
-        <p>
-          <strong>Phone Number: </strong>
-          {editingPhone ? (
-            <div className="ex-phone-input-container">
-              <input
-                type="text"
-                value={newPhoneNumber}
-                onChange={(e) => setNewPhoneNumber(e.target.value)}
-                className="ex-phone-input"
-              />
-              <div className="ex-phone-buttons">
-                <button onClick={handlePhoneSave} className="ex-save-button">
-                  Save
-                </button>
-                <button onClick={handlePhoneCancel} className="ex-cancel-button">
-                  Cancel
-                </button>
+
+      <h1>{userData.displayName}</h1>
+
+      <div className="ex-user-info">
+        <div>
+          <p>
+            <strong>Email:</strong> {userData.email}
+          </p>
+          <p>
+            <strong>Credits Earned:</strong> {userData.credits}
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Phone Number: </strong>
+            {editingPhone ? (
+              <div className="ex-phone-input-container">
+                <input
+                  type="text"
+                  value={newPhoneNumber}
+                  onChange={(e) => setNewPhoneNumber(e.target.value)}
+                  className="ex-phone-input"
+                />
+                <div className="ex-phone-buttons">
+                  <button onClick={handlePhoneSave} className="ex-save-button">
+                    Save
+                  </button>
+                  <button onClick={handlePhoneCancel} className="ex-cancel-button">
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
-          ) : (
-            <span>{userData.phNO}</span>
-          )}
-        </p>
-      </div>
-    </div>
-  
-    <div className="ex-footer-buttons">
-      <button className="ex-delete-account-button" onClick={handleDeleteAccount}>
-        Delete Account
-      </button>
-      <button className="ex-logout-button" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
-  
-    {showReauthConfirm && (
-      <div className="ex-login-popup2">
-        <div className="ex-login-popup-container2">
-          <h2>Reauthenticate to Confirm</h2>
-          <input
-            type="email"
-            placeholder="Email"
-            value={reauthEmail}
-            onChange={(e) => setReauthEmail(e.target.value)}
-            className="ex-popup-input"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={reauthPassword}
-            onChange={(e) => setReauthPassword(e.target.value)}
-            className="ex-popup-input"
-          />
-          <div className="ex-popup-buttons">
-            <button onClick={confirmReauth} className="ex-confirm-button">
-              Confirm
-            </button>
-            <button onClick={cancelReauth} className="ex-cancel-button">
-              Cancel
-            </button>
-          </div>
+            ) : (
+              <>
+                <span>{userData.phNO}</span>
+                {userData.email === authUserEmail && (
+                  <FaPencilAlt
+                    className="ex-edit-icon"
+                    onClick={handlePhoneEditClick}
+                  />
+                )}
+              </>
+            )}
+          </p>
         </div>
       </div>
-    )}
-  </div>
-  
+
+      {/* Bookmarks Section */}
+      <div className="ex-bookmarks-section">
+        <h2>Bookmarked Places</h2>
+        {loadingPlaces ? (
+          <div className="ex-loader">Loading places...</div>
+        ) : (
+          <div className="ex-bookmarks-list">
+            {bookmarkedPlaces.length > 0 ? (
+              bookmarkedPlaces.map((place, index) => (
+                <div key={index} className="ex-bookmark-item">
+                  <p className="ex-bookmark-address">{place.address}</p>
+                  <p className="ex-bookmark-coordinates">
+                    ({place.lat.toFixed(4)}, {place.lng.toFixed(4)})
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>No bookmarked places yet</p>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="ex-footer-buttons">
+        <button className="ex-delete-account-button" onClick={handleDeleteAccount}>
+          Delete Account
+        </button>
+        <button className="ex-logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+
+      {showReauthConfirm && (
+        <div className="ex-login-popup2">
+          <div className="ex-login-popup-container2">
+            <h2>Reauthenticate to Confirm</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              value={reauthEmail}
+              onChange={(e) => setReauthEmail(e.target.value)}
+              className="ex-popup-input"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={reauthPassword}
+              onChange={(e) => setReauthPassword(e.target.value)}
+              className="ex-popup-input"
+            />
+            <div className="ex-popup-buttons">
+              <button onClick={confirmReauth} className="ex-confirm-button">
+                Confirm
+              </button>
+              <button onClick={cancelReauth} className="ex-cancel-button">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

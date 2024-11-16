@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import {Navbar} from "../../Components/Navbar/Navbar";
+// import {Navbar} from "../../Components/Navbar/Navbar";
 import { auth, db, storage } from '../../firebase/firebase.config';
 import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification, deleteUser } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
@@ -99,7 +99,7 @@ const SignUp = () => {
                 <div className="hero" style={{ backgroundImage: 'url(https://i.ibb.co/1TprwH7/IMG-20231012-WA0017.jpg)', placeItems: 'normal' }}>
                     <div className="hero-overlay bg-opacity-60"></div>
                     <div className="px-5 lg:px-20">
-                        <Navbar />
+                        {/* <Navbar /> */}
                         <div className='py-10'>
                             <div className="flex justify-center my-12 lg:my-32 container mx-auto px-5">
                                 <div className="border-2 rounded-xl w-full md:w-3/4 lg:w-2/4 py-8">
