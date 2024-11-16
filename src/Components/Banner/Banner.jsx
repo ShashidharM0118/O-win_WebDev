@@ -2,9 +2,12 @@
 import { Link } from "react-router-dom";
 import {Navbar} from "../Navbar/Navbar.jsx";
 import Swipers from "../Swiper/Swipers.jsx";
+import { useNavigate } from 'react-router-dom';
+
 import backgroundImage from "../../assets/images/icons/chikkamagaluru.jpg";
 
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div className="text-white">
       <div
@@ -53,9 +56,13 @@ const Banner = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex gap-4">
-                    <button className="btn bg-yellow-500 border-none text-xl lg:text-2xl">
-                      Booking
-                    </button>
+                  <button
+  className="btn bg-yellow-500 border-none text-xl lg:text-2xl"
+  onClick={() => navigate('/booking')}
+>
+  Booking
+</button>
+
                     <Link to="/curr-tour">
                       <button className="btn bg-blue-500 border-none text-xl lg:text-2xl">
                         Current Tour

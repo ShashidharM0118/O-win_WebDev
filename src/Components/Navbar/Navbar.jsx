@@ -76,7 +76,13 @@ export const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-end md:navbar-end lg:navbar-center relative">
-                    <input type="text" className='bg-transparent border-2 rounded-lg p-2 w-10 md:w-56 lg:w-80' placeholder="Search Your destination..." />
+                <input
+    type="text"
+    className='bg-transparent border-2 rounded-lg p-2 w-10 md:w-56 lg:w-80'
+    placeholder="Search Your destination..."
+    onClick={() => navigate('/search')}
+/>
+
                     <button className="absolute right-20 md:right-20 lg:right-3">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </button>
