@@ -184,6 +184,7 @@ const Blogs = () => {
     }
 
     return (
+
       <LoadScript googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
@@ -217,7 +218,9 @@ const Blogs = () => {
   };
 
   return (
+    
     <div className="blogs-container">
+     
       {/* <h1>Blog Posts</h1> */}
       <button onClick={() => setShowForm(!showForm)} className="add-post-btn">
         {showForm ? "Close Form" : "Add Post"}

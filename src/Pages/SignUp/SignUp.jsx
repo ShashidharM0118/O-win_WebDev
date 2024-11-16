@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const SignUp = () => {
     const [name, setName] = useState('');
+    const [credits,setcredits]=useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -71,7 +72,8 @@ const SignUp = () => {
                             email: user.email,
                             displayName: user.displayName,
                             photoURL: imageUrl,
-                            phNO: phNO
+                            phNO: phNO,
+                            credits:0
                         });
 
                         navigate('/');
