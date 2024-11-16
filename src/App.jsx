@@ -18,6 +18,8 @@ import CurrMap from './Pages/CurrMap/CurrMap';
 import { AuthContext } from './Context/AuthContext';
 import UserProfile from './Components/UserProfile/UserProfile';
 import Blogs from './Components/Blogs/Blogs';
+import Booking from './Pages/Booking/Booking';
+import Search from './Pages/Search/Search';
 
 function App(){
 const router = createBrowserRouter([
@@ -38,12 +40,20 @@ const router = createBrowserRouter([
         element: <CurrTour></CurrTour>
       },
       {
+        path:'booking',
+        element: <Booking></Booking>
+      },
+      {
         path: '/destination',
         element: <Home></Home>
       },
       {
         path: '/blog',
         element: <Home></Home>
+      },
+      {
+        path: '/search',
+        element: <Search></Search>
       },
       {
         path: '/curr-map',
