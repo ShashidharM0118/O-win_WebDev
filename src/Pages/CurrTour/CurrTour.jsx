@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PlacesList from "./../../Components/Places/Places"; // Import the PlacesList component
@@ -13,11 +14,11 @@ const CurrTour = () => {
                 async (position) => {
                     const { latitude, longitude } = position.coords;
                     console.log("Current Coordinates:", { latitude, longitude });
-                    console.log("Google Maps API Key:", import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+                    console.log("Google Maps API Key:", import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY);
 
                     try {
                         const response = await fetch(
-                            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${api}`
+                            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${api_key}`
                         );
 
                         const data = await response.json();
@@ -44,6 +45,24 @@ const CurrTour = () => {
         }
     };
 
+
+    const handleViewMapClick = async () => {
+        try {
+            const response = await axios.post("http://localhost:3001/send-message", {
+                messageBody: "happy journey",
+            });
+    
+            if (response.status === 200) {
+                console.log("Location sent successfully.", currentPlace);
+            } else {
+                console.error("Failed to send location:", response.data);
+            }
+        } catch (error) {
+            console.error("Error sending location:", error.message);
+        }
+    };
+    
+
     useEffect(() => {
         getCurrentLocation();
     }, []);
@@ -58,7 +77,10 @@ const CurrTour = () => {
                 </p>
             </div>
             <Link to="/curr-map">
-                <button className="btn bg-blue-500 text-white px-6 py-3 rounded text-xl hover:bg-blue-600">
+                <button
+                    className="btn bg-blue-500 text-white px-6 py-3 rounded text-xl hover:bg-blue-600"
+                    onClick={handleViewMapClick}
+                >
                     View Map
                 </button>
             </Link>
