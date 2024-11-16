@@ -91,9 +91,13 @@ const Navbar = () => {
                     <ul className="flex gap-6 px-1 ml-5">
                         {navLink}
                     </ul>
-                    <Link to='/login'>
-                        <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
-                    </Link>
+                    {user ? (
+                        <button onClick={handleProfileClick}><ProfileLogo /></button>
+                    ) : (
+                        <Link to='/login'>
+                            <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
+                        </Link>
+                    )}
                     <div className='flex-none'>
                         <ThemeToggle />
                     </div>
