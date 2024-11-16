@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import Swipers from "../Swiper/Swipers";
+import {Navbar} from "../Navbar/Navbar.jsx";
+import Swipers from "../Swiper/Swipers.jsx";
 import backgroundImage from "../../assets/images/icons/chikkamagaluru.jpg";
 
 const Banner = () => {
@@ -25,8 +25,8 @@ const Banner = () => {
               {/* Left Column */}
               <div className="flex items-center flex-col lg:flex-row">
                 <div>
-                  <h1 className="mb-5 text-6xl md:text-7xl lg:text-9xl font-bold">
-                    CHIKKAMAGALURU
+                  <h1 className="mb-5 text-6xl md:text-7xl lg:text-6xl font-bold">
+                    Chikkamagaluru
                   </h1>
                   <p className="mb-5 text-xl lg:text-3xl">
                     Chikkamagaluru, often called the "Coffee Land of Karnataka,"
@@ -53,11 +53,11 @@ const Banner = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex gap-4">
-                    <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">
+                    <button className="btn bg-yellow-500 border-none text-xl lg:text-2xl">
                       Booking
                     </button>
                     <Link to="/curr-tour">
-                      <button className="btn bg-blue-500 border-none text-xl lg:text-3xl">
+                      <button className="btn bg-blue-500 border-none text-xl lg:text-2xl">
                         Current Tour
                       </button>
                     </Link>
