@@ -1,8 +1,43 @@
 import { Link, NavLink } from 'react-router-dom';
 import { FaPersonWalkingLuggage } from 'react-icons/fa6';
+import ProfileLogo from '../ProfileLogo/ProfileLogo';
+import { useNavigate } from 'react-router-dom';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebase.config';
+import { Context } from '../../Context/AuthContext';
+import { getAuth, signOut } from 'firebase/auth';
+import React, { useContext, useState, useEffect } from 'react';
 
 const Navbar = () => {
-
+    const { user, setUser } = useContext(Context);
+    const auth = getAuth();
+    const navigate = useNavigate();
+    const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    if (user && user.email) {
+      const fetchUserId = async () => {
+        try {
+          const q = query(collection(db, 'users'), where('email', '==', user.email));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userData = userDoc.data();
+            setUserId(userData._id); // use `_id` to get the user ID from the data
+          }
+        } catch (error) {
+          console.error('Error fetching user ID:', error);
+        }
+      };
+      fetchUserId();
+    }
+  }, [user]);
+  const handleProfileClick = () => {
+    if (userId) {
+      navigate(`/userprofile/${userId}`);
+    } else {
+      console.error("User ID not found");
+    }
+  };
     const navLink = <>
         <li>
             <NavLink to='/'>Home</NavLink>
@@ -59,9 +94,13 @@ const Navbar = () => {
                     <ul className="flex gap-6 px-1 ml-5">
                         {navLink}
                     </ul>
-                    <Link to='/login'>
-                        <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
-                    </Link>
+                     {user ? (
+                        <button onClick={handleProfileClick} ><ProfileLogo /></button>
+                    ) : (
+                        <Link to='/login'>
+                            <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>
