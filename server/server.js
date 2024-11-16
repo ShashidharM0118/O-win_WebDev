@@ -1,44 +1,50 @@
+require("dotenv").config();
 const express = require("express");
-const twilio = require("twilio");
 const bodyParser = require("body-parser");
+const twilio = require("twilio");
+const cors = require("cors"); // Import the CORS package
 
-const app = express();
-app.use(bodyParser.json());
+// Twilio credentials from .env
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Methods",
-        "GET,HEAD,PUT,PATCH,POST,DELETE"
-    );
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    next();
-});
-
-app.use(bodyParser.json());
-
-const accountSid = import.meta.env.VITE_TWILIO_ACCOUNT_SID;
-const authToken = import.meta.env.VITE_TWILIO_AUTH_TOKEN; // Your Auth Token from www.twilio.com/console
 const client = twilio(accountSid, authToken);
 
-app.post("/send-whatsapp", (req, res) => {
-    const { phoneNumber, message } = req.body;
+// Initialize Express app
+const app = express();
+const PORT = process.env.PORT || 3001; // Port can also be stored in .env
 
-    client.messages
-        .create({
-            body: "hi",
-            from: "whatsapp:+14155238886", // Your Twilio Sandbox WhatsApp number
-            to: `whatsapp:+919483746823`,
-        })
-        .then((message) => res.json({ success: true, messageSid: message.sid }))
-        .catch((err) =>
-            res.status(500).json({ success: false, error: err.message })
-        );
+// Middleware
+app.use(cors()); // Enable CORS for all routes
+app.use(bodyParser.json());
+
+// POST endpoint to send SMS
+app.post("/send-message", async (req, res) => {
+    const { messageBody } = req.body; // Get the message body from the request
+
+    if (!messageBody) {
+        return res.status(400).json({ success: false, error: "Missing 'messageBody' in request body." });
+    }
+
+    const msgOptions = {
+        from: process.env.TWILIO_PHONE_NUMBER, // Twilio phone number
+        to: process.env.RECIPIENT_PHONE_NUMBER, // Recipient's phone number
+        body: messageBody, // Message to send
+    };
+
+    try {
+        const message = await client.messages.create(msgOptions);
+        res.json({
+            success: true,
+            message: "SMS sent successfully!",
+            messageSid: message.sid,
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 });
 
-app.listen(3001, () => {
-    console.log("Server is running on port 3001");
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
