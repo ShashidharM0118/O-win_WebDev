@@ -215,187 +215,105 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="user-profile">
-      <div className="profile-picture">
-        {loading ? (
-          <div className="loader">Uploading...</div>
-        ) : (
-          <img src={profilePicture} alt="Profile" />
-        )}
-        {userData.email === authUserEmail && (
-          <>
-            <FaPencilAlt
-              className="edit-icon"
-              onClick={() => fileInputRef.current.click()}
-            />
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleProfilePictureUpload}
-              accept="image/*"
-            />
-          </>
-        )}
+    <div className="ex-user-profile">
+    <div className="ex-profile-picture">
+      {loading ? (
+        <div className="ex-loader">Uploading...</div>
+      ) : (
+        <img src={profilePicture} alt="Profile" />
+      )}
+      {userData.email === authUserEmail && (
+        <>
+          <FaPencilAlt
+            className="ex-edit-icon"
+            onClick={() => fileInputRef.current.click()}
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="ex-file-input"
+            onChange={handleProfilePictureUpload}
+            accept="image/*"
+          />
+        </>
+      )}
+    </div>
+  
+    <h1>{userData.displayName}</h1>
+  
+    <div className="ex-user-info">
+      <div>
+        <p>
+          <strong>Email:</strong> {userData.email}
+        </p>
       </div>
-
-      <h1>{userData.displayName}</h1>
-
-      <div className="user-info">
-        <div>
-          <p>
-            <strong>Email:</strong> {userData.email}
-          </p>
-        </div>
-        <div>
-          <p>
-            <strong>Phone Number: </strong>
-            {editingPhone ? (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginTop: "10px", // Space from the phone number
-                }}
-              >
-                <input
-                  type="text"
-                  value={newPhoneNumber}
-                  onChange={(e) => setNewPhoneNumber(e.target.value)}
-                  style={{
-                    padding: "5px",
-                    width: "200px", // Adjust input width
-                    marginBottom: "10px", // Space between input and buttons
-                    textAlign: "center",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                  }}
-                />
-                <div style={{ display: "flex", gap: "15px" }}>
-                  <button
-                    onClick={handlePhoneSave}
-                    style={{
-                      padding: "8px 15px",
-                      backgroundColor: "#007bff", // Blue background for Save
-                      color: "white",
-                      border: "none",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={handlePhoneCancel}
-                    style={{
-                      padding: "8px 15px",
-                      backgroundColor: "#e0e0e0", // Light grey for Cancel
-                      border: "none",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                      fontSize: "1rem",
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </div>
+      <div>
+        <p>
+          <strong>Phone Number: </strong>
+          {editingPhone ? (
+            <div className="ex-phone-input-container">
+              <input
+                type="text"
+                value={newPhoneNumber}
+                onChange={(e) => setNewPhoneNumber(e.target.value)}
+                className="ex-phone-input"
+              />
+              <div className="ex-phone-buttons">
+                <button onClick={handlePhoneSave} className="ex-save-button">
+                  Save
+                </button>
+                <button onClick={handlePhoneCancel} className="ex-cancel-button">
+                  Cancel
+                </button>
               </div>
-            ) : (
-              <>
-                <span>{userData.phNO}</span>
-              </>
-            )}
-          </p>
-        </div>
+            </div>
+          ) : (
+            <span>{userData.phNO}</span>
+          )}
+        </p>
       </div>
-
-      <div className="footer-buttons">
-        <button className="delete-account-button" onClick={handleDeleteAccount}>
-          Delete Account
-        </button>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
-
-      {showReauthConfirm && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "15px",
-            marginTop: "20px", // Adding space from other elements
-          }}
-        >
+    </div>
+  
+    <div className="ex-footer-buttons">
+      <button className="ex-delete-account-button" onClick={handleDeleteAccount}>
+        Delete Account
+      </button>
+      <button className="ex-logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  
+    {showReauthConfirm && (
+      <div className="ex-login-popup2">
+        <div className="ex-login-popup-container2">
           <h2>Reauthenticate to Confirm</h2>
           <input
             type="email"
             placeholder="Email"
             value={reauthEmail}
             onChange={(e) => setReauthEmail(e.target.value)}
-            style={{
-              padding: "8px",
-              width: "250px",
-              marginBottom: "10px", // Space between input fields
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
+            className="ex-popup-input"
           />
           <input
             type="password"
             placeholder="Password"
             value={reauthPassword}
             onChange={(e) => setReauthPassword(e.target.value)}
-            style={{
-              padding: "8px",
-              width: "250px",
-              marginBottom: "10px", // Space between input fields
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
+            className="ex-popup-input"
           />
-          <div
-            style={{
-              display: "flex",
-              gap: "15px", // Space between buttons
-              justifyContent: "center",
-            }}
-          >
-            <button
-              onClick={confirmReauth}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#007bff", // Blue background for Confirm
-                color: "white",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                fontSize: "1rem",
-              }}
-            >
+          <div className="ex-popup-buttons">
+            <button onClick={confirmReauth} className="ex-confirm-button">
               Confirm
             </button>
-            <button
-              onClick={cancelReauth}
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#e0e0e0", // Light grey for Cancel
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                fontSize: "1rem",
-              }}
-            >
+            <button onClick={cancelReauth} className="ex-cancel-button">
               Cancel
             </button>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+  </div>
+  
   );
 };
 
