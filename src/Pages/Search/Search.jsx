@@ -45,17 +45,40 @@ const Search = () => {
     placesService.current = new window.google.maps.places.PlacesService(map.current);
   };
 
-  const toggleBookmark = (placeId) => {
+  const toggleBookmark = (place) => {
     setBookmarkedPlaces(prev => {
+        console.log(place);
+        const placeId = place.place_id;
       const newBookmarks = new Set(prev);
       if (newBookmarks.has(placeId)) {
         newBookmarks.delete(placeId);
+        // Remove from localStorage
+        const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+        const updatedBookmarks = bookmarks.filter(item => item.placeId !== placeId);
+        localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
       } else {
         newBookmarks.add(placeId);
+        // Add to localStorage
+        const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+        bookmarks.push({
+          placeId: placeId,
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+          name: place.name,
+          open : place.opening_hours,
+          type: place.types
+        });
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
       }
+  
+      // Log the bookmarks to the console
+      const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+      console.log("Bookmarked Places:", storedBookmarks);
+  
       return newBookmarks;
     });
   };
+  
 
   const clearMarkers = () => {
     markers.current.forEach(marker => marker.setMap(null));
@@ -254,7 +277,7 @@ const Search = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleBookmark(place.place_id);
+                          toggleBookmark(place);
                         }}
                         className={`p-2 rounded-full hover:bg-gray-100 transition-colors ${
                           bookmarkedPlaces.has(place.place_id) ? 'text-green-500' : 'text-gray-400'
