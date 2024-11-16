@@ -246,6 +246,9 @@ const UserProfile = () => {
         <p>
           <strong>Email:</strong> {userData.email}
         </p>
+        <p>
+          <strong>Credits Earned</strong> {userData.credits}
+        </p>
       </div>
       <div>
         <p>
