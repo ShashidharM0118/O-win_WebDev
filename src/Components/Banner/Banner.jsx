@@ -38,18 +38,19 @@ const Banner = () => {
                   {/* Stats Section */}
                   <div className="grid grid-cols-3 gap-4 py-6">
                     <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">120km</div>
-                      <div className="text-sm text-gray-300">Beach Length</div>
+                      <div className="text-3xl font-bold">1930m</div>
+                      <div className="text-sm text-gray-300">Highest Peak</div>
                     </div>
                     <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">4.8</div>
+                      <div className="text-3xl font-bold">4.7</div>
                       <div className="text-sm text-gray-300">Rating</div>
                     </div>
                     <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">28°C</div>
+                      <div className="text-3xl font-bold">22°C</div>
                       <div className="text-sm text-gray-300">Temperature</div>
                     </div>
                   </div>
+
                   {/* CTA Buttons */}
                   <div className="flex gap-4">
                     <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">
@@ -63,7 +64,6 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-
               {/* Right Column - Swipers */}
               <div className="w-full lg:w-[50%]">
                 <Swipers />

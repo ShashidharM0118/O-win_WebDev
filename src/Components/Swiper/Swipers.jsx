@@ -38,7 +38,7 @@ const Swipers = () => {
                 <SwiperSlide className='border-10 rounded-xl md:rounded-3xl lg:rounded-3xl border-yellow-500'>
                     <Link to='sreemangal'>
                         <div className='absolute bottom-0 pl-1 md:pl-2 lg:pl-5 pb-1 md:pb-2 lg:pb-5'>
-                            <p className='md:text-xl lg:text-4xl'>Sreemongol</p>
+                            <p className='md:text-xl lg:text-4xl'>Sreemangal</p>
                         </div>
                         <img src={image2} alt="" />
                     </Link>
@@ -46,7 +46,7 @@ const Swipers = () => {
                 <SwiperSlide className='border-10 rounded-xl md:rounded-3xl lg:rounded-3xl border-yellow-500'>
                     <Link to='sundarbans'>
                         <div className='absolute bottom-0 pl-1 md:pl-2 lg:pl-5 pb-1 md:pb-2 lg:pb-5'>
-                            <p className='md:text-xl lg:text-4xl'>sundorbon</p>
+                            <p className='md:text-xl lg:text-4xl'>sunderbans</p>
                         </div>
                         <img src={image3} alt="" />
                     </Link>
