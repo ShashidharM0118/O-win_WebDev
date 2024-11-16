@@ -9,9 +9,8 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [daisyui], // Use the imported daisyui plugin directly
   daisyui: {
     themes: ["light", "dark"], // Add or customize themes
   },
-}
-
+};
