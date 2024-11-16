@@ -8,6 +8,7 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import "./Blogs.css";
 import GeocodeComponent from "../GeocodeComponent/GeocodeComponent";
+
 const mapContainerStyle = {
   height: "400px",
   width: "100%"
@@ -27,6 +28,7 @@ const Blogs = () => {
     location: null,
     userEmail: "",
     userImage: "",
+    postType: "events",
   });
 
   const [status, setStatus] = useState("");
@@ -34,6 +36,7 @@ const Blogs = () => {
   const [showForm, setShowForm] = useState(false);
   const [showAllPosts, setShowAllPosts] = useState(false);
   const [usersData, setUsersData] = useState({});
+  const [activeFilter, setActiveFilter] = useState("all");
 
   const fetchPosts = async () => {
     try {
@@ -41,7 +44,6 @@ const Blogs = () => {
       const snapshot = await getDocs(collectionRef);
       const postsData = snapshot.docs.map((doc) => {
         const data = doc.data();
-        // Ensure location data is properly structured if it exists
         if (data.location && typeof data.location === 'object') {
           data.location = {
             lat: Number(data.location.lat),
@@ -107,7 +109,6 @@ const Blogs = () => {
         postData.video = await getDownloadURL(videoRef);
       }
 
-      // Validate location data before saving
       if (postData.location && 
           typeof postData.location.lat === 'number' && 
           !isNaN(postData.location.lat) &&
@@ -126,7 +127,18 @@ const Blogs = () => {
       await addDoc(collectionRef, postData);
       setStatus("Post submitted successfully!");
       setShowForm(false);
+      setFormData({
+        image: null,
+        video: null,
+        comment: "",
+        rating: 1,
+        location: null,
+        userEmail: "",
+        userImage: "",
+        postType: "events",
+      });
       fetchPosts();
+
     } catch (error) {
       console.error("Error submitting post:", error);
       setStatus("Failed to submit post.");
@@ -174,7 +186,6 @@ const Blogs = () => {
   };
 
   const renderMap = (location) => {
-    // Validate location data before rendering map
     if (!location || 
         typeof location.lat !== 'number' || 
         typeof location.lng !== 'number' || 
@@ -184,7 +195,6 @@ const Blogs = () => {
     }
 
     return (
-
       <LoadScript googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
@@ -209,7 +219,6 @@ const Blogs = () => {
     );
   };
 
-  // Function to safely display coordinates
   const formatCoordinates = (location) => {
     if (!location || typeof location.lat !== 'number' || typeof location.lng !== 'number') {
       return null;
@@ -217,37 +226,66 @@ const Blogs = () => {
     return `${location.lat.toFixed(6)}, ${location.lng.toFixed(6)}`;
   };
 
+  // Filter posts based on active filter
+  const filteredPosts = posts.filter(post => {
+    if (activeFilter === "all") return true;
+    return post.postType === activeFilter;
+  });
+
   return (
-    
     <div className="blogs-container">
-     
-      {/* <h1>Blog Posts</h1> */}
       <button onClick={() => setShowForm(!showForm)} className="add-post-btn">
         {showForm ? "Close Form" : "Add Post"}
       </button>
 
+      {/* Filter buttons */}
+      <div className="filter-container">
+        <button 
+          className={`filter-btn ${activeFilter === "all" ? "active" : ""}`}
+          onClick={() => setActiveFilter("all")}
+        >
+          All Posts
+        </button>
+        <button 
+          className={`filter-btn ${activeFilter === "events" ? "active" : ""}`}
+          onClick={() => setActiveFilter("events")}
+        >
+          Events
+        </button>
+        <button 
+          className={`filter-btn ${activeFilter === "dishes" ? "active" : ""}`}
+          onClick={() => setActiveFilter("dishes")}
+        >
+          Dishes
+        </button>
+        <button 
+          className={`filter-btn ${activeFilter === "locations" ? "active" : ""}`}
+          onClick={() => setActiveFilter("locations")}
+        >
+          Locations
+        </button>
+      </div>
+
       {showForm && (
         <form onSubmit={handleSubmit} className="blog-form">
-         <div>
-  <label>Upload Image:</label>
-  <input 
-    type="file" 
-    name="image" 
-    accept="image/*" 
-    onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))} 
-    required 
-  />
-</div>
-<div>
-  <label>Upload Video:</label>
-  <input 
-    type="file" 
-    name="video" 
-    accept="video/*" 
-    onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.files[0] }))} 
-    required 
-  />
-</div>
+          <div>
+            <label>Upload Image:</label>
+            <input 
+              type="file" 
+              name="image" 
+              accept="image/*" 
+              onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))} 
+            />
+          </div>
+          <div>
+            <label>Upload Video:</label>
+            <input 
+              type="file" 
+              name="video" 
+              accept="video/*" 
+              onChange={(e) => setFormData(prev => ({ ...prev, video: e.target.files[0] }))} 
+            />
+          </div>
           <div>
             <label>Comment:</label>
             <textarea 
@@ -270,6 +308,44 @@ const Blogs = () => {
             />
           </div>
           <div>
+            <label>Post Type:</label>
+            <div className="radio-group">
+              <label>
+                <input 
+                  type="radio" 
+                  name="postType" 
+                  value="events" 
+                  checked={formData.postType === "events"} 
+                  onChange={(e) => setFormData(prev => ({ ...prev, postType: e.target.value }))} 
+                  required 
+                />
+                Events
+              </label>
+              <label>
+                <input 
+                  type="radio" 
+                  name="postType" 
+                  value="dishes" 
+                  checked={formData.postType === "dishes"} 
+                  onChange={(e) => setFormData(prev => ({ ...prev, postType: e.target.value }))} 
+                  required 
+                />
+                Dishes
+              </label>
+              <label>
+                <input 
+                  type="radio" 
+                  name="postType" 
+                  value="locations" 
+                  checked={formData.postType === "locations"} 
+                  onChange={(e) => setFormData(prev => ({ ...prev, postType: e.target.value }))} 
+                  required 
+                />
+                Locations
+              </label>
+            </div>
+          </div>
+          <div>
             <button type="button" onClick={handleLocation}>Get Location</button>
             {formData.location && formatCoordinates(formData.location) && (
               <p>Location obtained: {formatCoordinates(formData.location)}</p>
@@ -282,7 +358,7 @@ const Blogs = () => {
       {status && <p className="status-message">{status}</p>}
 
       <div className="posts-container">
-        {posts.slice(0, showAllPosts ? posts.length : 3).map((post) => {
+        {filteredPosts.slice(0, showAllPosts ? filteredPosts.length : 3).map((post) => {
           const user = usersData[post.userEmail];
           const coordinates = formatCoordinates(post.location);
 
@@ -301,6 +377,7 @@ const Blogs = () => {
                   </p>
                 </div>
               </div>
+              <div className="post-type-badge">{post.postType}</div>
               <p className="comment">{post.comment}</p>
               <div className="media-block">
                 {post.image && <img src={post.image} alt="Post visual" />}
@@ -310,23 +387,18 @@ const Blogs = () => {
                   </video>
                 )}
               </div>
-              
-              {/* <div className="rating">{renderStars(post.rating)}</div> */}
-              
               {coordinates && (
                 <div className="location">
-                  {/* <p>Location: {coordinates}</p> */}
                   {renderMap(post.location)}
                 </div>
               )}
               <div className="rating">{renderStars(post.rating)}</div>
-              {/* <p className="comment">{post.comment}</p> */}
             </div>
           );
         })}
       </div>
 
-      {!showAllPosts && posts.length > 3 && (
+      {!showAllPosts && filteredPosts.length > 3 && (
         <button className="more-btn" onClick={() => setShowAllPosts(true)}>
           View More
         </button>
