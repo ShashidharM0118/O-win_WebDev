@@ -1,138 +1,138 @@
 /* Container for the user profile */
-.user-profile {
-  max-width: 800px; /* Increased width for a larger profile card */
-  margin: 40px auto; /* Center the card */
-  padding: 40px; /* Add padding inside the card */
-  background: #fff; /* White background */
-  border-radius: 20px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  font-size: 1.9rem; /* Slightly larger text */
-  text-align: center; /* Center align the content */
+.ex-user-profile {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.9rem;
+  text-align: center;
 }
 
 /* Profile picture container */
-.profile-picture {
+.ex-profile-picture {
   position: relative;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin-bottom: 20px; /* Add spacing below the picture */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.profile-picture img {
-  width: 190px; /* Larger profile image */
+.ex-profile-picture img {
+  width: 190px;
   height: 190px;
-  border-radius: 50%; /* Make it circular */
-  object-fit: cover; /* Ensure it crops correctly */
-  border: 2px solid #ddd; /* Add a border around the picture */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
 }
 
-.profile-picture .edit-icon {
-  font-size: 1.5rem; /* Larger edit icon */
+.ex-profile-picture .ex-edit-icon {
+  font-size: 1.5rem;
   position: absolute;
   cursor: pointer;
-  color: #007bff; /* Blue color for the edit icon */
+  color: #007bff;
   bottom: 10px;
-  right: 270px; /* Position relative to the image */
+  right: 270px;
 }
 
 /* User name styling */
-h1 {
+.ex-h1 {
   font-size: 1.8rem;
   margin: 15px 0;
 }
 
 /* User info container */
-.user-info {
+.ex-user-info {
   margin: 20px 0;
 }
 
-.user-info-itemz {
-  margin-bottom: 20px; /* Space between info sections */
+.ex-user-info-itemz {
+  margin-bottom: 20px;
 }
 
 /* Styling for the profile details */
-.user-info-itemz span {
+.ex-user-info-itemz span {
   display: block;
   font-weight: bold;
-  font-size: 1.2rem; /* Increase font size */
+  font-size: 1.2rem;
 }
 
 /* Phone number and editing */
-.phone-info {
+.ex-phone-info {
   display: flex;
-  align-items: center; /* Align text and icon horizontally */
-  justify-content: center; /* Optional: centers the content horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
-.phone-number {
-  font-size: 1.4rem; /* Match the phone number font size with the rest of the content */
-  margin-right: 10px; /* Space between the phone number and edit icon */
+.ex-phone-number {
+  font-size: 1.4rem;
+  margin-right: 10px;
 }
 
-.edit-iconss {
+.ex-edit-iconss {
   cursor: pointer;
   color: #007bff;
-  font-size: 1.4rem; /* Adjust icon size */
+  font-size: 1.4rem;
 }
 
 /* Footer buttons container */
-.footer-buttons {
+.ex-footer-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px; /* Spacing between buttons and other elements */
+  margin-top: 30px;
 }
 
 /* Common button styling */
-.footer-buttons button {
-  padding: 12px 20px; /* Button padding */
-  font-size: 1.5rem; /* Font size */
+.ex-footer-buttons button {
+  padding: 12px 20px;
+  font-size: 1.5rem;
   border: none;
-  border-radius: 8px; /* Smooth rounded corners */
+  border-radius: 8px;
   cursor: pointer;
 }
 
 /* Delete Account Button */
-.delete-account-button {
-  background-color: #ff4d4f; /* Red background */
-  color: white; /* White text */
+.ex-delete-account-button {
+  background-color: #ff4d4f;
+  color: white;
 }
 
-.delete-account-button:hover {
-  background-color: #e04343; /* Darker red on hover */
+.ex-delete-account-button:hover {
+  background-color: #e04343;
 }
 
 /* Logout Button */
-.logout-button {
-  background-color: #007bff; /* Blue background */
-  color: white; /* White text */
+.ex-logout-button {
+  background-color: #007bff;
+  color: white;
 }
 
-.logout-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.ex-logout-button:hover {
+  background-color: #0056b3;
 }
 
 /* Loader while uploading profile picture */
-.loader {
+.ex-loader {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 /* Popup for reauthentication */
-.login-popup2 {
+.ex-login-popup2 {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
 
-.login-popup-container2 {
+.ex-login-popup-container2 {
   background: #fff;
   padding: 30px;
   border-radius: 15px;
@@ -142,23 +142,23 @@ h1 {
   text-align: center;
 }
 
-.login-popup-title2 {
+.ex-login-popup-title2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.login-popup-title2 h2 {
+.ex-login-popup-title2 h2 {
   font-size: 1.5rem;
 }
 
-.login-popup-title2 img {
+.ex-login-popup-title2 img {
   width: 20px;
   cursor: pointer;
 }
 
 /* Styling for inputs in the popup */
-.login-popup-condition2 input {
+.ex-login-popup-condition2 input {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -168,7 +168,7 @@ h1 {
 }
 
 /* Button inside popup */
-.login-popup-condition2 button {
+.ex-login-popup-condition2 button {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
@@ -180,14 +180,14 @@ h1 {
   margin-top: 10px;
 }
 
-.login-popup-condition2 button:hover {
+.ex-login-popup-condition2 button:hover {
   background: #0056b3;
 }
 
 /* Edit button icon for profile picture */
-.edit-icon {
-  font-size: 1.5rem; /* Increase icon size */
-  color: #007bff; /* Blue color */
+.ex-edit-icon {
+  font-size: 1.5rem;
+  color: #007bff;
   cursor: pointer;
 }
 
@@ -195,5 +195,3 @@ h1 {
 input[type="file"] {
   display: none;
 }
-
-/* Add any additional styles as needed */
