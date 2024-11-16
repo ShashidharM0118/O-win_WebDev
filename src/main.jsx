@@ -13,6 +13,8 @@ import Sajek from './Components/TravelPlace/Sajek';
 import Sreemangal from './Components/TravelPlace/Sreemangal';
 import Sundarbans from './Components/TravelPlace/Sundarbans';
 import HotelList from './Components/HotelList/HotelList';
+import CurrTour from './Pages/CurrTour/CurrTour';
+import CurrMap from './Pages/CurrMap/CurrMap';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,12 +29,20 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
+        path:'curr-tour',
+        element: <CurrTour></CurrTour>
+      },
+      {
         path: '/destination',
         element: <Home></Home>
       },
       {
         path: '/blog',
         element: <Home></Home>
+      },
+      {
+        path: '/curr-map',
+        element: <CurrMap></CurrMap>
       },
       {
         path: '/contact',
