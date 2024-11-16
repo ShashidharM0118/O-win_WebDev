@@ -1,205 +1,199 @@
+/* Container for the user profile */
 .user-profile {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: #f7f7f7;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-  }
-  
-  .profile-picture {
-    position: relative;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .profile-picture img {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #d1d1d1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .edit-icon {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: #fff;
-    border-radius: 50%;
-    padding: 6px;
-    cursor: pointer;
-    color: #007bff;
-    font-size: 22px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s, transform 0.3s;
-  }
-  
-  .edit-icon:hover {
-    background: #e0e0e0;
-    transform: scale(1.1);
-  }
-  
-  .user-info {
-    margin-bottom: 30px;
-  }
-  
-  .user-info-itemz {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-  }
-  
-  h1 {
-    margin-bottom: 10px;
-    font-size: 1.8rem;
-    font-weight: 600;
-  }
-  
-  h3 {
-    margin-top: 30px;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #555;
-  }
-  
-  span {
-    color: #555;
-  }
-  
-  .footer-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-  }
-  
-  .logout-button, .edit-profile-button {
-    padding: 12px 25px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s, transform 0.2s;
-  }
-  
-  .logout-button {
-    background-color: #ff4b4b;
-    color: white;
-    border: 2px solid #e84141;
-  }
-  
-  .logout-button:hover {
-    background-color: #e84141;
-    transform: translateY(-2px);
-  }
-  
-  .edit-profile-button {
-    background-color: #4caf50;
-    color: white;
-    border: 2px solid #45a049;
-  }
-  
-  .edit-profile-button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-  }
-  
-  .login-popup2, .login-popup3 {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .login-popup-container2, .login-popup-container3 {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
-    animation: fadeIn 0.4s;
-  }
-  
-  .login-popup-title2, .login-popup-title3 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  .login-popup-title2 h2, .login-popup-title3 h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-  
-  .login-popup-title2 img, .login-popup-title3 img {
-    cursor: pointer;
-    width: 22px;
-    height: 22px;
-  }
-  
-  .login-popup-condition2 input, .login-popup-condition3 input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-  
-  .login-popup-condition2 button, .login-popup-condition3 button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin: 5px;
-    width: calc(50% - 10px);
-    transition: background 0.3s;
-  }
-  
-  .login-popup-condition2 button:hover, .login-popup-condition3 button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive adjustments */
-  @media screen and (max-width: 768px) {
-    .user-profile {
-      max-width: 95%;
-      padding: 20px;
-    }
-  
-    .profile-picture img {
-      width: 120px;
-      height: 120px;
-    }
-  
-    .user-info-itemz {
-      font-size: 1rem;
-    }
-  
-    .footer-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .logout-button, .edit-profile-button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  }
-  
+  max-width: 800px; /* Increased width for a larger profile card */
+  margin: 40px auto; /* Center the card */
+  padding: 40px; /* Add padding inside the card */
+  background: #fff; /* White background */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 1.9rem; /* Slightly larger text */
+  text-align: center; /* Center align the content */
+}
+
+/* Profile picture container */
+.profile-picture {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-bottom: 20px; /* Add spacing below the picture */
+}
+
+.profile-picture img {
+  width: 190px; /* Larger profile image */
+  height: 190px;
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Ensure it crops correctly */
+  border: 2px solid #ddd; /* Add a border around the picture */
+}
+
+.profile-picture .edit-icon {
+  font-size: 1.5rem; /* Larger edit icon */
+  position: absolute;
+  cursor: pointer;
+  color: #007bff; /* Blue color for the edit icon */
+  bottom: 10px;
+  right: 270px; /* Position relative to the image */
+}
+
+/* User name styling */
+h1 {
+  font-size: 1.8rem;
+  margin: 15px 0;
+}
+
+/* User info container */
+.user-info {
+  margin: 20px 0;
+}
+
+.user-info-itemz {
+  margin-bottom: 20px; /* Space between info sections */
+}
+
+/* Styling for the profile details */
+.user-info-itemz span {
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem; /* Increase font size */
+}
+
+/* Phone number and editing */
+.phone-info {
+  display: flex;
+  align-items: center; /* Align text and icon horizontally */
+  justify-content: center; /* Optional: centers the content horizontally */
+}
+
+.phone-number {
+  font-size: 1.4rem; /* Match the phone number font size with the rest of the content */
+  margin-right: 10px; /* Space between the phone number and edit icon */
+}
+
+.edit-iconss {
+  cursor: pointer;
+  color: #007bff;
+  font-size: 1.4rem; /* Adjust icon size */
+}
+
+/* Footer buttons container */
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px; /* Spacing between buttons and other elements */
+}
+
+/* Common button styling */
+.footer-buttons button {
+  padding: 12px 20px; /* Button padding */
+  font-size: 1.5rem; /* Font size */
+  border: none;
+  border-radius: 8px; /* Smooth rounded corners */
+  cursor: pointer;
+}
+
+/* Delete Account Button */
+.delete-account-button {
+  background-color: #ff4d4f; /* Red background */
+  color: white; /* White text */
+}
+
+.delete-account-button:hover {
+  background-color: #e04343; /* Darker red on hover */
+}
+
+/* Logout Button */
+.logout-button {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+}
+
+.logout-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Loader while uploading profile picture */
+.loader {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Popup for reauthentication */
+.login-popup2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.login-popup-container2 {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-popup-title2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-popup-title2 h2 {
+  font-size: 1.5rem;
+}
+
+.login-popup-title2 img {
+  width: 20px;
+  cursor: pointer;
+}
+
+/* Styling for inputs in the popup */
+.login-popup-condition2 input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Button inside popup */
+.login-popup-condition2 button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-popup-condition2 button:hover {
+  background: #0056b3;
+}
+
+/* Edit button icon for profile picture */
+.edit-icon {
+  font-size: 1.5rem; /* Increase icon size */
+  color: #007bff; /* Blue color */
+  cursor: pointer;
+}
+
+/* Styling for profile edit form */
+input[type="file"] {
+  display: none;
+}
+
+/* Add any additional styles as needed */
