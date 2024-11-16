@@ -5,7 +5,7 @@ import PlacesList from "./../../Components/Places/Places"; // Import the PlacesL
 const CurrTour = () => {
     const [currentPlace, setCurrentPlace] = useState("Fetching location...");
     const [errorMessage, setErrorMessage] = useState("");
-    const api = "AIzaSyCH582J8KurpHix2JMAYtitxDfc-ANbvVk";
+    const api_key = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
 
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
