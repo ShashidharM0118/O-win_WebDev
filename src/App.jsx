@@ -16,6 +16,9 @@ import HotelList from './Components/HotelList/HotelList';
 import CurrTour from './Pages/CurrTour/CurrTour';
 import CurrMap from './Pages/CurrMap/CurrMap';
 import { AuthContext } from './Context/AuthContext';
+import UserProfile from './Components/UserProfile/UserProfile';
+
+
 function App(){
 const router = createBrowserRouter([
   {
@@ -73,6 +76,11 @@ const router = createBrowserRouter([
       {
         path:'/test',
         element:<HotelList></HotelList>
+      },
+      {
+        path:'/userprofile/:id',
+        element:<UserProfile></UserProfile>
+
       }
     ]
   },

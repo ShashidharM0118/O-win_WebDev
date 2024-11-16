@@ -12,7 +12,7 @@ const Navbar = () => {
     const { user, setUser } = useContext(Context);
     const auth = getAuth();
     const navigate = useNavigate();
-    
+    const [userId, setUserId] = useState(null);
   useEffect(() => {
     if (user && user.email) {
       const fetchUserId = async () => {
@@ -31,7 +31,13 @@ const Navbar = () => {
       fetchUserId();
     }
   }, [user]);
-
+  const handleProfileClick = () => {
+    if (userId) {
+      navigate(`/userprofile/${userId}`);
+    } else {
+      console.error("User ID not found");
+    }
+  };
     const navLink = <>
         <li>
             <NavLink to='/'>Home</NavLink>
@@ -89,7 +95,7 @@ const Navbar = () => {
                         {navLink}
                     </ul>
                      {user ? (
-                        <button ><ProfileLogo /></button>
+                        <button onClick={handleProfileClick} ><ProfileLogo /></button>
                     ) : (
                         <Link to='/login'>
                             <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
