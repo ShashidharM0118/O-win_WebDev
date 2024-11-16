@@ -17,7 +17,7 @@ import CurrTour from './Pages/CurrTour/CurrTour';
 import CurrMap from './Pages/CurrMap/CurrMap';
 import { AuthContext } from './Context/AuthContext';
 import UserProfile from './Components/UserProfile/UserProfile';
-
+import Blogs from './Components/Blogs/Blogs';
 
 function App(){
 const router = createBrowserRouter([
@@ -81,6 +81,10 @@ const router = createBrowserRouter([
         path:'/userprofile/:id',
         element:<UserProfile></UserProfile>
 
+      },
+      {
+        path:'/blogs',
+        element:<Blogs></Blogs>
       }
     ]
   },

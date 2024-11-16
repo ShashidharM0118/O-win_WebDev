@@ -1,0 +1,43 @@
+.blogs-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .blogs-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .blogs-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .blogs-container label {
+    font-weight: bold;
+  }
+  
+  .blogs-container input,
+  .blogs-container textarea,
+  .blogs-container button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .blogs-container button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .blogs-container button:hover {
+    background: #0056b3;
+  }
+  
