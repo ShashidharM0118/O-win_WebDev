@@ -6,7 +6,7 @@ const Sajek = () => {
     return (
         <div>
             <div className="text-white">
-                <div className="hero" style={{ backgroundImage: 'url(https://i.ibb.co/1TprwH7/IMG-20231012-WA0017.jpg)', placeItems: 'normal' }}>
+                <div className="hero" style={{ backgroundImage: "url(/src/assets/images/icons/sajek1.jpg)", placeItems: 'normal' }}>
                     <div className="hero-overlay bg-opacity-60"></div>
                     <div>
                         <div className="px-5 lg:px-20">
@@ -20,8 +20,8 @@ const Sajek = () => {
 
                                                 The region is characterized by lush green hills, dense forests, and a cool, refreshing climate, making it a perfect retreat for visitors seeking respite from the sweltering heat of the plains. Sajek offers stunning panoramic views of valleys, meandering rivers, and quaint villages, adding to its allure.
                                             </p>
-                                            <Link to='/'>
-                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">GO HOME</button>
+                                            <Link to='/login'>
+                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">Explore</button>
                                             </Link>
                                         </div>
                                     </div>

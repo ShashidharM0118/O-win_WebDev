@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
@@ -20,8 +19,8 @@ const Sundarbans = () => {
 
                                                 Encompassing a vast area of over 10,000 square kilometers across both countries, the Sundarbans is characterized by its distinctive network of tidal waterways, mudflats, and dense mangrove forests. The name "Sundarbans" is derived from the dominant mangrove tree species, the Sundari (Heritiera fomes), which contributes to the region's remarkable biodiversity.
                                             </p>
-                                            <Link to='/'>
-                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">GO HOME</button>
+                                            <Link to='/login'>
+                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">Explore</button>
                                             </Link>
                                         </div>
                                     </div>

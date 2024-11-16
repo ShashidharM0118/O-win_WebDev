@@ -5,7 +5,7 @@ const Sreemangal = () => {
     return (
         <div>
             <div className="text-white">
-                <div className="hero" style={{ backgroundImage: 'url(https://i.ibb.co/1TprwH7/IMG-20231012-WA0017.jpg)', placeItems: 'normal' }}>
+                <div className="hero" style={{ backgroundImage: "url(/src/assets/images/icons/sreemangal.jpg)", placeItems: 'normal' }}>
                     <div className="hero-overlay bg-opacity-60"></div>
                     <div>
                         <div className="px-5 lg:px-20">
@@ -19,8 +19,8 @@ const Sreemangal = () => {
 
                                                 The town is situated amidst rolling hills and verdant valleys, where endless stretches of tea estates paint the scenery in shades of green. The undulating tea gardens, interspersed with winding roads and streams, create a stunning mosaic that captivates visitors as they explore this idyllic region.
                                             </p>
-                                            <Link to='/'>
-                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">GO HOME</button>
+                                            <Link to='/login'>
+                                                <button className="btn bg-yellow-500 border-none text-xl lg:text-3xl">EXPLORE</button>
                                             </Link>
                                         </div>
                                     </div>
