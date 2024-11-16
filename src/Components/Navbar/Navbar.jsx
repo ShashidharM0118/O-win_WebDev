@@ -9,7 +9,7 @@ import { Context } from '../../Context/AuthContext';
 import { getAuth, signOut } from 'firebase/auth';
 import { useContext, useState, useEffect } from 'react';
 
-const Navbar = () => {
+export const Navbar = () => {
     const { user, setUser } = useContext(Context);
     const auth = getAuth();
     const navigate = useNavigate();
@@ -55,7 +55,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto mt-10 mb-10">
             <div className="navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -88,14 +88,14 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-end hidden lg:flex">
-                    <ul className="flex gap-6 px-1 ml-5">
+                    <ul className="flex gap-6 px-1 ml-5 text-2xl mr-5" >
                         {navLink}
                     </ul>
                     {user ? (
                         <button onClick={handleProfileClick}><ProfileLogo /></button>
                     ) : (
                         <Link to='/login'>
-                            <button className='btn bg-yellow-500 border-none ml-5'>Login</button>
+                            <button className='btn bg-yellow-500 border-none ml-5 mr-5'>Login</button>
                         </Link>
                     )}
                     <div className='flex-none'>
@@ -107,4 +107,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+// export default Navbar;

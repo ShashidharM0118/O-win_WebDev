@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
+import {Navbar} from "../../Components/Navbar/Navbar";
 import { auth, db, storage } from '../../firebase/firebase.config';
 import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification, deleteUser } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';

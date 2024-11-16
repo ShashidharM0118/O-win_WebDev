@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
+import {Navbar} from "../../Components/Navbar/Navbar";
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
