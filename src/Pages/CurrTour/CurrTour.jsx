@@ -1,13 +1,13 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import PlacesList from "./../../Components/Places/Places"; // Import the PlacesList component
-
+import { Context } from '../../Context/AuthContext';
 const CurrTour = () => {
     const [currentPlace, setCurrentPlace] = useState("Fetching location...");
     const [errorMessage, setErrorMessage] = useState("");
     const api_key = import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY;
-
+    const { user } = useContext(Context);
     const getCurrentLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -69,7 +69,7 @@ const CurrTour = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center text-center p-4">
-            <h1 className="text-4xl font-bold mb-8">Current Tour</h1>
+            <h1 className="text-4xl font-bold mb-8"> Hello ನಮಸ್ಕಾರ {user?.displayName}</h1>
             <div className="mb-8">
                 <h2 className="text-2xl font-semibold">Your Current Location:</h2>
                 <p className="text-xl mt-4">
