@@ -21,17 +21,26 @@ FlyBy is a Smart Travel Companion Platform that leverages modern technologies to
 
 ![Native Language Greeting](https://github.com/ShashidharM0118/O-win_WebDev/blob/main/greeting.jpg)
 
+---
+
 ### Surrounding Event Notifications
 
 ![Surrounding Event Notifications](https://github.com/ShashidharM0118/O-win_WebDev/blob/main/notification.jpg)
 
+---
+
 ### Dark and Light Mode
 
-<div style="display: flex; gap: 10px;">
+<div style="display: flex; gap: 20px; justify-content: center;">
   <img src="https://github.com/ShashidharM0118/O-win_WebDev/blob/main/dark.jpg" alt="Dark Mode" width="45%">
   <img src="https://github.com/ShashidharM0118/O-win_WebDev/blob/main/light.jpg" alt="Light Mode" width="45%">
 </div>
 
-### Bookmarking System
+---
 
-![Bookmarking System](https://github.com/ShashidharM0118/O-win_WebDev/blob/main/bookmark.jpg)
+### Bookmark System 
+
+<div style="display: flex; gap: 20px; justify-content: center;">
+  <img src="https://github.com/ShashidharM0118/O-win_WebDev/blob/main/bookmark.jpg" alt="Bookmarking System" width="45%">
+  <img src="https://github.com/ShashidharM0118/O-win_WebDev/blob/main/profile.jpg" alt="Profile Page" width="45%">
+</div>
