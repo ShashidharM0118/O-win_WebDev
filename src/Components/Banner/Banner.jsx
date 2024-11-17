@@ -29,28 +29,24 @@ const Banner = () => {
               <div className="flex items-center flex-col lg:flex-row">
                 <div>
                   <h1 className="mb-5 text-6xl md:text-7xl lg:text-6xl font-bold">
-                    Chikkamagaluru
+                  "Your Journey, Our Care Every Step of the Way!"
                   </h1>
                   <p className="mb-5 text-xl lg:text-3xl">
-                    Chikkamagaluru, often called the "Coffee Land of Karnataka,"
-                    is a hidden gem nestled in the Western Ghats. Known for its
-                    lush coffee plantations and mist-covered hills, the town
-                    offers a serene escape from the hustle and bustle of city
-                    life...
+                  Welcome to your ultimate travel companion website, designed to make every journey memorable, seamless, and worry-free. Whether you're a seasoned globetrotter or embarking on your first adventure, our platform is crafted to cater to all your travel needs.
                   </p>
                   {/* Stats Section */}
                   <div className="grid grid-cols-3 gap-4 py-6">
-                    <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">1930m</div>
-                      <div className="text-sm text-gray-300">Highest Peak</div>
+                    <div className="border-l-2 border-yellow-400 pl-2">
+                      <div className="text-3xl font-bold">Explore</div>
+                      {/* <div className="text-sm text-gray-300">Highest Peak</div> */}
                     </div>
-                    <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">4.7</div>
-                      <div className="text-sm text-gray-300">Rating</div>
+                    <div className="border-l-2 border-yellow-400 pl-2">
+                      <div className="text-3xl font-bold">Embark</div>
+                      {/* <div className="text-sm text-gray-300">Rating</div> */}
                     </div>
-                    <div className="border-l-2 border-yellow-400 pl-4">
-                      <div className="text-3xl font-bold">22°C</div>
-                      <div className="text-sm text-gray-300">Temperature</div>
+                    <div className="border-l-2 border-yellow-400 pl-2">
+                      <div className="text-3xl font-bold">Adventure</div>
+                      {/* <div className="text-sm text-gray-300">Temperature</div> */}
                     </div>
                   </div>
 
