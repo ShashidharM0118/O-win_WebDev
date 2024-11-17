@@ -56,6 +56,13 @@ const Blogs = () => {
           ...data,
         };
       });
+      // Sort posts by `uploadedTime` (latest first)
+    const sortedPosts = postsData.sort((a, b) => {
+      const timeA = a.uploadedTime?.toDate?.() || new Date(0);
+      const timeB = b.uploadedTime?.toDate?.() || new Date(0);
+      return timeB - timeA; // Descending order
+    });
+
       setPosts(postsData);
       fetchUserData(postsData);
     } catch (error) {
