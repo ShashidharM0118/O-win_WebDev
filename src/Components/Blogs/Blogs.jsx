@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { collection, getDocs, addDoc, serverTimestamp, query, where } from "firebase/firestore";
@@ -89,6 +90,33 @@ const Blogs = () => {
     setStatus("Submitting post...");
     const storage = getStorage();
     const postData = { ...formData };
+
+    /*****
+     */ 
+      const body = {
+    type: formData.postType, // Add postType
+    comment: formData.comment,  // Add comment
+  };
+
+  console.log(body);
+  try {
+    const response = await axios.post('http://localhost:3001/send-message', body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (response.status !== 200) {
+      throw new Error('Failed to send post');
+    }
+  
+    // Handle success, e.g., display a message or redirect
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+  
+     /* 
+     */
 
     try {
       const user = getAuth().currentUser;
