@@ -35,20 +35,22 @@ const Banner = () => {
                   Welcome to your ultimate travel companion website, designed to make every journey memorable, seamless, and worry-free. Whether you're a seasoned globetrotter or embarking on your first adventure, our platform is crafted to cater to all your travel needs.
                   </p>
                   {/* Stats Section */}
-                  <div className="grid grid-cols-3 gap-4 py-6">
-                    <div className="border-l-2 border-yellow-400 pl-2">
-                      <div className="text-3xl font-bold">Explore</div>
-                      {/* <div className="text-sm text-gray-300">Highest Peak</div> */}
-                    </div>
-                    <div className="border-l-2 border-yellow-400 pl-2">
-                      <div className="text-3xl font-bold">Embark</div>
-                      {/* <div className="text-sm text-gray-300">Rating</div> */}
-                    </div>
-                    <div className="border-l-2 border-yellow-400 pl-2">
-                      <div className="text-3xl font-bold">Adventure</div>
-                      {/* <div className="text-sm text-gray-300">Temperature</div> */}
-                    </div>
-                  </div>
+                  {/* Stats Section */}
+<div className="grid grid-cols-3 gap-4 py-6 hidden lg:grid">
+  <div className="border-l-2 border-yellow-400 pl-2">
+    <div className="text-3xl font-bold">Explore</div>
+    {/* <div className="text-sm text-gray-300">Highest Peak</div> */}
+  </div>
+  <div className="border-l-2 border-yellow-400 pl-2">
+    <div className="text-3xl font-bold">Embark</div>
+    {/* <div className="text-sm text-gray-300">Rating</div> */}
+  </div>
+  <div className="border-l-2 border-yellow-400 pl-2">
+    <div className="text-3xl font-bold">Adventure</div>
+    {/* <div className="text-sm text-gray-300">Temperature</div> */}
+  </div>
+</div>
+
 
                   {/* CTA Buttons */}
                   <div className="flex gap-4">
