@@ -1,0 +1,15 @@
+/* Tailwind is used for responsive design, no extra media queries are needed */
+
+.search-bar {
+    display: block;
+  }
+  
+  /* Custom Overrides in Media Queries (Optional) */
+  
+  /* Hide search bar on tablets (768px) */
+  @media (max-width: 768px) {
+    .search-bar {
+      display: none;
+    }
+  }
+  

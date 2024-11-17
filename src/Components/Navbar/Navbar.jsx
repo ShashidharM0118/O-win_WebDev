@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { FaPersonWalkingLuggage } from 'react-icons/fa6';
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx"
+import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import ProfileLogo from '../ProfileLogo/ProfileLogo.jsx';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -8,109 +8,102 @@ import { db } from '../../firebase/firebase.config';
 import { Context } from '../../Context/AuthContext';
 import { getAuth, signOut } from 'firebase/auth';
 import { useContext, useState, useEffect } from 'react';
+import './Navbar.css';
 
 export const Navbar = () => {
-    const { user, setUser } = useContext(Context);
+    const { user } = useContext(Context);
     const auth = getAuth();
     const navigate = useNavigate();
     const [userId, setUserId] = useState(null);
-  useEffect(() => {
-    if (user && user.email) {
-      const fetchUserId = async () => {
-        try {
-          const q = query(collection(db, 'users'), where('email', '==', user.email));
-          const querySnapshot = await getDocs(q);
-          if (!querySnapshot.empty) {
-            const userDoc = querySnapshot.docs[0];
-            const userData = userDoc.data();
-            setUserId(userData._id); // use `_id` to get the user ID from the data
-          }
-        } catch (error) {
-          console.error('Error fetching user ID:', error);
+
+    useEffect(() => {
+        if (user && user.email) {
+            const fetchUserId = async () => {
+                try {
+                    const q = query(collection(db, 'users'), where('email', '==', user.email));
+                    const querySnapshot = await getDocs(q);
+                    if (!querySnapshot.empty) {
+                        const userDoc = querySnapshot.docs[0];
+                        const userData = userDoc.data();
+                        setUserId(userData._id); // use `_id` to get the user ID from the data
+                    }
+                } catch (error) {
+                    console.error('Error fetching user ID:', error);
+                }
+            };
+            fetchUserId();
         }
-      };
-      fetchUserId();
-    }
-  }, [user]);
-  const handleProfileClick = () => {
-    if (userId) {
-      navigate(`/userprofile/${userId}`);
-    } else {
-      console.error("User ID not found");
-    }
-  };
-    const navLink = <>
-        <li>
-            <NavLink to='/'>Home</NavLink>
-        </li>
-        <li>
-            <NavLink to='/destination'>Destination</NavLink>
-        </li>
-        <li>
-            <NavLink to='/blogs'>Blogs</NavLink>
-        </li>
-        <li>
-            <NavLink to='/contact'>Contact</NavLink>
-        </li>
-    </>
+    }, [user]);
+
+    const handleProfileClick = () => {
+        if (userId) {
+            navigate(`/userprofile/${userId}`);
+        } else {
+            console.error("User ID not found");
+        }
+    };
+
+    const navLink = (
+        <>
+            <li>
+                <NavLink to='/blogs'>Blogs</NavLink>
+            </li>
+        </>
+    );
 
     return (
-        <div className="container mx-auto mt-10 mb-10">
-            <div className="navbar">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <div className="container mx-auto px-4">
+            <div className="navbar flex justify-between items-center">
+                {/* Navbar Start */}
+                <div className="navbar-start flex items-center gap-4">
+                    <div className="dropdown lg:hidden">
+                        <label tabIndex={0} className="btn btn-ghost">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
                         </label>
-                        <ul tabIndex={0} className="dropdown-content mt-3 bg-white rounded-2xl p-5 text-black z-[1] shadow w-52">
+                        <ul tabIndex={0} className="dropdown-content bg-white rounded-xl shadow-lg text-black p-4 w-48">
                             {navLink}
                         </ul>
                     </div>
-                    <div className='flex gap-2'>
-                        <div>
-                            <FaPersonWalkingLuggage className='text-5xl'></FaPersonWalkingLuggage>
-                        </div>
-                        <div className='flex items-center'>
-                            <p>Travel <br /> Service</p>
+                    <div className="flex items-center gap-2">
+                        <FaPersonWalkingLuggage className="text-3xl" />
+                        <div className="text-sm">
+                            Travel <br /> Service
                         </div>
                     </div>
                 </div>
-                <div className="navbar-end md:navbar-end lg:navbar-center relative">
-                <input
-    type="text"
-    className='bg-transparent border-2 rounded-lg p-2 w-10 md:w-56 lg:w-80'
-    placeholder="Search Your destination..."
-    onClick={() => navigate('/search')}
-/>
 
-                    <button className="absolute right-20 md:right-20 lg:right-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                {/* Search Bar */}
+                <div className="hidden md:flex items-center relative">
+                    <input
+                        type="text"
+                        className="bg-gray-100 border rounded-lg p-2 md:w-56 lg:w-80 search-bar"
+                        placeholder="Search Your Destination..."
+                        onClick={() => navigate('/search')}
+                    />
+                    <button className="absolute right-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
                     </button>
-                    
-
-                    <Link to='/login' className='lg:hidden'>
-                        <button className='btn bg-yellow-500 border-none ml-4'>Login</button>
-                    </Link>
                 </div>
 
-                <div className="navbar-end hidden lg:flex">
-                    <ul className="flex gap-6 px-1 ml-5 text-2xl mr-5" >
+                {/* Navbar End */}
+                <div className="hidden lg:flex items-center gap-6">
+                    <ul className="flex gap-4">
                         {navLink}
                     </ul>
                     {user ? (
                         <button onClick={handleProfileClick}><ProfileLogo /></button>
                     ) : (
-                        <Link to='/login'>
-                            <button className='btn bg-yellow-500 border-none ml-5 mr-5'>Login</button>
+                        <Link to="/login">
+                            <button className="btn bg-yellow-500 border-none">Login</button>
                         </Link>
                     )}
-                    <div className='flex-none'>
-                        <ThemeToggle />
-                    </div>
+                    <ThemeToggle />
                 </div>
             </div>
         </div>
     );
 };
-
-// export default Navbar;

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
-// import {Navbar} from "../Navbar/Navbar.jsx";
+import {Navbar} from "../Navbar/Navbar.jsx";
 import Swipers from "../Swiper/Swipers.jsx";
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const Banner = () => {
 
         <div className="relative z-10">
           <div className="px-5 lg:px-20">
-            {/* <Navbar /> */}
+            <Navbar />
             <div className="flex flex-col lg:flex-row gap-20 justify-between container mx-auto px-5 py-20 lg:py-56">
               {/* Left Column */}
               <div className="flex items-center flex-col lg:flex-row">

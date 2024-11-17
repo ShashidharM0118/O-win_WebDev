@@ -1,12 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-// import Root from './Pages/Root/Root';
-import Layout from "./Pages/Layout/Layout"
+import Root from "./Pages/Root/Root"
+// import Layout from "./Pages/Layout/Layout"
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
@@ -26,14 +24,10 @@ function App(){
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
+    element: <Root></Root>,
     children: [
       {
         path: '/',
-        element: <Home></Home>
-      },
-      {
-        path: '/news',
         element: <Home></Home>
       },
       {
@@ -43,10 +37,6 @@ const router = createBrowserRouter([
       {
         path:'booking',
         element: <Booking></Booking>
-      },
-      {
-        path: '/destination',
-        element: <Home></Home>
       },
       {
         path: '/blog',
@@ -60,10 +50,6 @@ const router = createBrowserRouter([
         path: '/curr-map',
         element: <CurrMap></CurrMap>
       },
-      // {
-      //   path: '/contact',
-      //   element: <Home></Home>
-      // },
       {
         path: '/login',
         element: <Login></Login>
