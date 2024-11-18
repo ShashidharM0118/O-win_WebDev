@@ -3,26 +3,26 @@ import { Context } from '../../Context/AuthContext';
 import { getAuth, signOut } from 'firebase/auth'; // Assuming you have AuthContext configured
 import { db } from '../../firebase/firebase.config';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import './ProfileLogo.css'; // Importing the CSS file
+import './ProfileLogo.css'; 
 
 function ProfileLogo() {
-    const { user } = useContext(Context); // Assuming setUser is provided by AuthContext
-    const auth = getAuth(); // Initialize Firebase auth
+    const { user } = useContext(Context);
+    const auth = getAuth();
     const [profileImageUrl, setProfileImageUrl] = useState('');
 
-    // Function to store image in local storage
+    
     const storeImageInLocalStorage = (imageUrl) => {
         localStorage.setItem('profileImageUrl', imageUrl);
     };
 
-    // Function to get image from local storage
+    
     const getImageFromLocalStorage = () => {
         return localStorage.getItem('profileImageUrl');
     };
 
     useEffect(() => {
         const fetchProfileImage = async () => {
-            // Check local storage first
+    
             const storedImageUrl = getImageFromLocalStorage();
             if (storedImageUrl) {
                 setProfileImageUrl(storedImageUrl);
@@ -34,12 +34,12 @@ function ProfileLogo() {
 
                 if (!querySnapshot.empty) {
                     const userData = querySnapshot.docs[0].data();
-                    const photoURL = userData.photoURL; // Extract the photoURL
+                    const photoURL = userData.photoURL;
                     
-                    // Check if the photoURL from Firestore is different from the stored one
+                
                     if (photoURL && photoURL !== storedImageUrl) {
-                        setProfileImageUrl(photoURL); // Update the profile image URL
-                        storeImageInLocalStorage(photoURL); // Update local storage
+                        setProfileImageUrl(photoURL); 
+                        storeImageInLocalStorage(photoURL);
                     }
                 }
             }
