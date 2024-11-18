@@ -118,7 +118,7 @@ export const Navbar = () => {
                 </Link>
               )}
               <div className="border-l border-gray-200 dark:border-gray-700 h-6 mx-2" />
-              <ThemeToggle />
+              {/* <ThemeToggle /> */}
             </div>
           </div>
         </div>
